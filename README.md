@@ -1,4 +1,4 @@
-# Simple webpack boilerplate
+# Simple react webpack bulma boilerplate
 
 A ready to use simple react webpack bulma boilerplate.
 
