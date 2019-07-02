@@ -5,7 +5,15 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
   filename: "./index.html"
 });
 
+const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'js/bundle.js'
+  },
   module: {
     rules: [
       {
@@ -32,8 +40,18 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            'sass-loader'
+          ]
+        })
       }
     ]
   },
-  plugins: [htmlWebpackPlugin]
+  plugins: [htmlWebpackPlugin, new ExtractTextPlugin('css/main.css')]
 };
